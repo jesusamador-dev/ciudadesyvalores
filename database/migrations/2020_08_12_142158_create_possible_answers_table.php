@@ -14,7 +14,7 @@ class CreatePossibleAnswersTable extends Migration
     public function up()
     {
         Schema::create('possible_answers', function (Blueprint $table) {
-            $table->id();
+            $table->id()->primary();
             $table->integer('question_id')->nullable(false);
             $table->string('description', 255)->nullable();
             $table->enum('is_active', [1, 0])->nullable(false);
