@@ -15,7 +15,13 @@ class CreateQuestionsTable extends Migration
     {
         Schema::create('questions', function (Blueprint $table) {
             $table->id();
+            $table->string('question', 200)->nullable(false);
+            $table->enum('gradable', [1, 0])->nullable();
+            $table->integer('questionary_id')->nullable(false);
+            $table->enum('is_active', [1, 0])->nullable(false);
             $table->timestamps();
+
+            $table->foreign('questionary_id')->references('id')->on('questionnaires');
         });
     }
 

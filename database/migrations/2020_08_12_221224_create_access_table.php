@@ -15,6 +15,10 @@ class CreateAccessTable extends Migration
     {
         Schema::create('access', function (Blueprint $table) {
             $table->id();
+            $table->string('email')->unique();
+            $table->string('password');
+            $table->enum('role', ['admin', 'partner']);
+            $table->enum('is_active', [1, 0])->nullable(false);
             $table->timestamps();
         });
     }
