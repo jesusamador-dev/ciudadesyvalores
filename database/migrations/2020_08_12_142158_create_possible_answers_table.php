@@ -14,13 +14,13 @@ class CreatePossibleAnswersTable extends Migration
     public function up()
     {
         Schema::create('possible_answers', function (Blueprint $table) {
-            $table->id()->primary();
+            $table->id();
             $table->integer('question_id')->nullable(false);
             $table->string('description', 255)->nullable();
             $table->enum('is_active', [1, 0])->nullable(false);
             $table->timestamps();
 
-            $table->foreign('question_id')->references('id')->on('questions');
+            // $table->foreign('question_id')->references('id')->on('questions');
         });
     }
 
