@@ -14,14 +14,15 @@ class CreateQuestionsTable extends Migration
     public function up()
     {
         Schema::create('questions', function (Blueprint $table) {
-            $table->id();
+            $table->engine = 'InnoDB';
+            $table->increments('id');
             $table->string('question', 200)->nullable(false);
             $table->enum('gradable', [1, 0])->nullable();
-            $table->integer('questionary_id')->nullable(false);
-            $table->enum('is_active', [1, 0])->nullable(false);
+            $table->integer('idQuestionary')->unsigned();
+            $table->enum('isActive', [1, 0])->nullable(false)->default(1);
             $table->timestamps();
 
-            //$table->foreign('questionary_id')->references('id')->on('questionnaires');
+            $table->foreign('idQuestionary')->references('id')->on('questionnaires');
         });
     }
 

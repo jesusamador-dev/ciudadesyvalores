@@ -14,8 +14,9 @@ class CreateAddressesTable extends Migration
     public function up()
     {
         Schema::create('addresses', function (Blueprint $table) {
-            $table->id();
-            $table->string('user_id', 50)->nullable(false);
+            $table->engine = 'InnoDB';
+            $table->increments('id');
+            $table->integer('idUser')->unsigned();
             $table->string('street', 80)->nullable(false);
             $table->string('neighborhood', 120)->nullable(false);
             $table->string('city', 50)->nullable(false);
@@ -25,10 +26,10 @@ class CreateAddressesTable extends Migration
             $table->string('outdoorNumber', 10)->nullable(false);
             $table->string('interiorNumber', 10)->nullable();
             $table->string('references', 220)->nullable();
-            $table->enum('is_active', [1, 0])->nullable(false);
+            $table->enum('isActive', [1, 0])->nullable(false)->default(1);
             $table->timestamps();
 
-            //$table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('idUser')->references('id')->on('users');
         });
     }
 

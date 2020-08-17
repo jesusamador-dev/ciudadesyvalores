@@ -14,9 +14,9 @@ class CreateQuestionnairesTable extends Migration
     public function up()
     {
         Schema::create('questionnaires', function (Blueprint $table) {
-            $table->id('id');
+            $table->increments('id');
             $table->string('name', 60)->nullable(false);
-            $table->enum('is_active', [1, 0])->nullable(false);
+            $table->enum('isActive', [1, 0])->nullable(false)->default(1);
             $table->timestamps();
         });
     }
