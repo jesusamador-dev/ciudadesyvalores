@@ -13,10 +13,10 @@ class CreateQuestionnairesTable extends Migration
      */
     public function up()
     {
-        Schema::create('questionnaires', function (Blueprint $table) {
-            $table->id()->primary();
+        Schema::create('questionary', function (Blueprint $table) {
+            $table->increments('idQuestionary');
             $table->string('name', 60)->nullable(false);
-            $table->enum('is_active', [1, 0])->nullable(false);
+            $table->enum('isActive', [1, 0])->nullable(false)->default(1);
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ class CreateQuestionnairesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('questionnaires');
+        Schema::dropIfExists('questionary');
     }
 }

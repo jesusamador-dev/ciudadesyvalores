@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAccesTable extends Migration
+class CreateAccessTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,12 +14,19 @@ class CreateAccesTable extends Migration
     public function up()
     {
         Schema::create('access', function (Blueprint $table) {
-            $table->id()->primary();
-            $table->string('email')->unique();
+            $table->engine = 'InnoDB';
+            $table->increments('idAccess');
+            $table->integer('idUser')->unsigned();
+            $table->string('email', 100)->unique();
             $table->string('password');
             $table->enum('role', ['admin', 'partner']);
-            $table->enum('is_active', [1, 0])->nullable(false);
+            $table->enum('isActive', [1, 0])->nullable(false)->default(1);
             $table->timestamps();
+
+            $table->foreign('idUser')->references('idUser')
+                ->on('user')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
         });
     }
 
