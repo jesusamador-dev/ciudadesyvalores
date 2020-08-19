@@ -13,9 +13,8 @@ class CreateAnswersTable extends Migration
      */
     public function up()
     {
-        Schema::create('answers', function (Blueprint $table) {
+        Schema::create('answer', function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->increments('id');
             $table->integer('idQuestion')->unsigned();
             $table->integer('idUser')->unsigned();
             $table->string('answer', 255)->nullable(false);
@@ -23,8 +22,16 @@ class CreateAnswersTable extends Migration
             $table->enum('isActive', [1, 0])->nullable(false)->default(1);
             $table->timestamps();
 
-            $table->foreign('idQuestion')->references('id')->on('questions');
-            $table->foreign('idUser')->references('id')->on('users');
+            $table->foreign('idQuestion')->references('idQuestion')
+                ->on('question')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
+            $table->foreign('idUser')->references('idUser')
+                ->on('user')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
+
+            $table->primary(['idQuestion', 'idUser']);
         });
     }
 
@@ -35,6 +42,6 @@ class CreateAnswersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('answers');
+        Schema::dropIfExists('answer');
     }
 }

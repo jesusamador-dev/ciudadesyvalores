@@ -13,16 +13,19 @@ class CreateQuestionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('questions', function (Blueprint $table) {
+        Schema::create('question', function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->increments('id');
+            $table->increments('idQuestion');
             $table->string('question', 200)->nullable(false);
             $table->enum('gradable', [1, 0])->nullable();
             $table->integer('idQuestionary')->unsigned();
             $table->enum('isActive', [1, 0])->nullable(false)->default(1);
             $table->timestamps();
 
-            $table->foreign('idQuestionary')->references('id')->on('questionnaires');
+            $table->foreign('idQuestionary')->references('idQuestionary')
+                ->on('questionary')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
         });
     }
 
@@ -33,6 +36,6 @@ class CreateQuestionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('questions');
+        Schema::dropIfExists('question');
     }
 }

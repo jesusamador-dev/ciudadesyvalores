@@ -13,9 +13,9 @@ class CreateAddressesTable extends Migration
      */
     public function up()
     {
-        Schema::create('addresses', function (Blueprint $table) {
+        Schema::create('address', function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->increments('id');
+            $table->increments('idAddress');
             $table->integer('idUser')->unsigned();
             $table->string('street', 80)->nullable(false);
             $table->string('neighborhood', 120)->nullable(false);
@@ -29,7 +29,10 @@ class CreateAddressesTable extends Migration
             $table->enum('isActive', [1, 0])->nullable(false)->default(1);
             $table->timestamps();
 
-            $table->foreign('idUser')->references('id')->on('users');
+            $table->foreign('idUser')->references('idUser')
+                ->on('user')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
         });
     }
 
@@ -40,6 +43,6 @@ class CreateAddressesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('addresses');
+        Schema::dropIfExists('address');
     }
 }
