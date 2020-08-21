@@ -26,6 +26,7 @@ class CreateAddressesTable extends Migration
             $table->string('outdoorNumber', 10)->nullable(false);
             $table->string('interiorNumber', 10)->nullable();
             $table->string('references', 220)->nullable();
+            $table->string('typeAddress', 30)->nullable(false)->default(1);
             $table->enum('isActive', [1, 0])->nullable(false)->default(1);
             $table->timestamps();
 

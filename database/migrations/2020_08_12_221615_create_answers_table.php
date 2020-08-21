@@ -18,7 +18,7 @@ class CreateAnswersTable extends Migration
             $table->integer('idQuestion')->unsigned();
             $table->integer('idUser')->unsigned();
             $table->string('answer', 255)->nullable(false);
-            $table->enum('qualification', [1, 0])->nullable();
+            $table->enum('qualification', ['Bien', 'Mal', 'Pendiente', 'No evaluable'])->nullable(false);
             $table->enum('isActive', [1, 0])->nullable(false)->default(1);
             $table->timestamps();
 

@@ -16,17 +16,11 @@ class CreateAccessTable extends Migration
         Schema::create('access', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('idAccess');
-            $table->integer('idUser')->unsigned();
             $table->string('email', 100)->unique();
             $table->string('password');
             $table->enum('role', ['admin', 'partner']);
             $table->enum('isActive', [1, 0])->nullable(false)->default(1);
             $table->timestamps();
-
-            $table->foreign('idUser')->references('idUser')
-                ->on('user')
-                ->onDelete('cascade')
-                ->onUpdate('cascade');
         });
     }
 
