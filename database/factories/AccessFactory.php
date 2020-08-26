@@ -2,7 +2,7 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\User;
+use App\Access;
 use Faker\Generator as Faker;
 
 /*
@@ -16,12 +16,10 @@ use Faker\Generator as Faker;
 |
 */
 
-$factory->define(User::class, function (Faker $faker) {
+$factory->define(Access::class, function (Faker $faker) {
     return [
-        'name' => $faker->name,
-        'lastName' => $faker->lastName,
-        'motherLastName' => $faker->lastName,
-        'phone' => '833-312-1442',
-        'birthday' => '14/04/1998'
+        'email' => $faker->unique()->safeEmail,
+        'password' => bcrypt('secret'),
+        'role' => 'partner'
     ];
 });

@@ -18,7 +18,7 @@ class CreateUsersTable extends Migration
             $table->string('name', 70)->nullable(false);
             $table->string('lastName', 70)->nullable(false);
             $table->string('motherLastName', 70)->nullable(false);
-            $table->string('phone', 10)->nullable(false);
+            $table->string('phone', 12)->nullable(false);
             $table->string('birthday', 10)->nullable(false);
             $table->enum('isActive', [1, 0])->nullable(false)->default(1);
             $table->timestamps();
