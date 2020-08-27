@@ -15,6 +15,9 @@ class AccessSeeder extends Seeder
             factory(App\User::class)->create([
                 'idUser' => $user->id
             ]);
+            factory(App\Address::class)->create([
+                'idUser' => $user->id
+            ]);
         });
     }
 }

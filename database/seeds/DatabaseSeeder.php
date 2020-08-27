@@ -13,7 +13,7 @@ class DatabaseSeeder extends Seeder
     {
         // Model::unguard();
         $this->call(AccessSeeder::class);
-        $this->call(UsersSeeder::class);
+        // $this->call(UsersSeeder::class);
         // Model::reguard();
     }
 }
